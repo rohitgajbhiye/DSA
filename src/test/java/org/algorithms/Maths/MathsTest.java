@@ -88,4 +88,34 @@ public class MathsTest {
         int result = maths.openCloseProblem(5);
         Assert.assertEquals(2,result);
     }
+
+    @Test
+    public void Primality_1(){
+        boolean result = maths.isPrimeNumber(17);
+        Assert.assertEquals(true,result);
+    }
+
+    @Test
+    public void findPrimeNumbers(){
+        int [] result = maths.findPrimeNumbers(20);
+        Assert.assertArrayEquals(new int[]{2,3,5,7,11,13,17,19},result);
+    }
+
+    @Test
+    public void primeFactorization() {
+        maths.primeFactorization(64);
+    }
+
+    @Test
+    public void primeFactorizationOptimised() {
+        maths.primeFactorizationOptimized(64);
+    }
+
+    @Test
+    public void countingPairs(){
+        int result = maths.countingPairs(new int[]{2,2,1,7,5,3},4);
+        Assert.assertEquals(5,result);
+    }
+
+
 }

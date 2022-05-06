@@ -1,6 +1,7 @@
 package org.algorithms.Maths;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Maths {
 
@@ -193,5 +194,144 @@ public class Maths {
             }
         }
         return count;
+    }
+
+    /**
+     * Prime number is the number which has exactly 2 divisor , and the divisor is distinct
+     * brute force
+     * @param num
+     * @return
+     */
+    public boolean isPrime(int num){
+        int count =0;
+        for(int i=1;i<=num;i++){
+            if((num%i)==0){
+                count++;
+            }
+        }
+        return count==2;
+    }
+
+    /**
+     * Every number has symmetrical number of factors before and after their square root
+     * consider 16
+     * 1 2 4 8 16 - Number of factor before 4 is exactly same after 4 , similarly for 20
+     * 1 2 4 5 10 20 - square root is in middle of 4-5 approx
+     * by above logic we can try running loop till sqrt(n) and find if there exists is any factor
+     * @param num
+     * @return
+     */
+    public boolean isPrimeNumber(int num){
+        double root = Math.sqrt(num);
+        for(int i=2;i<=root;i++){
+            if(num%i==0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Given a number , the task is to find out what are the primary number till n
+     *
+     * sieve of eratosthenes n(log(log n))
+     * @param num
+     */
+    public int [] findPrimeNumbers(int num){
+        ArrayList<Integer> list = new ArrayList<>();
+        int [] prime = new int[num+1];
+        for(int i=2;i<=num;i++){
+            if(prime[i]==0){
+                list.add(i);
+                for(int j=(i*i);j<=num;j++){
+                    if (j % i == 0) {
+                        prime[j]=1;
+                    }
+                }
+            }
+        }
+        // Convert array list to array
+        int [] result = new int[list.size()];
+        for(int i=0;i<list.size();i++){
+            result[i] = list.get(i);
+        }
+        return result;
+    }
+
+    /**
+     * Given a number find all the prime factors
+     * @param num
+     */
+    public void primeFactorization(int num){
+        int i=2;
+        while(num>1 && i<=num){
+            if(num%i==0){
+                System.out.println(i);
+                num = num/i;
+                continue;
+            }
+            i++;
+        }
+    }
+
+    /**
+     * Given a number find all the prime factors
+     * In above solution we were dividing number starting from 2 till n but if we take a close look at below prime factors
+     * 20 = 2,2,5 - sqrt - 4.something
+     * 64 = 2,2,2,2,2,2,2
+     * 404 = 2 ,2 ,101
+     *
+     * Meaning their would not be any possibility of find 2 factors after sqrt of number ,
+     * their would only be one factor and that also would be prime
+     *
+     * So modifying below logic
+     * @param num
+     */
+    public void primeFactorizationOptimized(int num){
+        int i=2;
+        while(num>1 && i<=num){
+            if(num%i==0 && (i*i) <=num){
+                System.out.println(i);
+                num = num/i;
+                continue;
+            }
+            i++;
+        }
+        if(num>1){
+            System.out.println(num);
+        }
+    }
+
+    /**
+     * Given an array nums and a target integer
+     * count number of pairs i, j in the array for which (nums[i] + nums[j]) % k ==0
+     *
+     * for input {2,2,1,7,5,3} pairs are {2,2} , {1,7} ,{1,3} , {7,5},{5,3}
+     * brute force approach is to compare every element with each other which will require 0(n2) time
+     * @param nums
+     * @return
+     */
+    public int countingPairs(int []nums,int target){
+        int count =0;
+        for(int i=0;i<nums.length;i++){
+            for(int j=i+1;j<nums.length;j++){
+                if((nums[i] + nums[j])%target ==0){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Given an Array and a target , We need to count the pairs which is divisible by target
+     * meaning (nums[i] + nums[j]) % k ==0 (Same as above
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int countingPairsOptimised(int []nums,int target){
+        //Integer.toBinaryString((3^4));
+        return -1;
     }
 }
