@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -57,5 +58,45 @@ public class SortTest {
             min = account.getSalary();
         }
         Assert.assertTrue(isSorted);
+    }
+    @Test
+    public void KClosestTest() {
+        int [][] nums = new int[][]{
+                {3,3},
+                {5,-1},
+                {-2,4},
+        };
+        int [][] result = sort.kClosest(nums,2);
+        for(int i=0;i<result.length;i++){
+            for(int j=0;j<result[i].length;j++){
+                System.out.print(result[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    @Test
+    public void test(){
+
+    }
+
+    @Test
+    public void orderedSortingTest(){
+        String s = sort.customSortString("cbafg","abcd");
+        System.out.println(s);
+    }
+
+    @Test
+    public void LargestNumber(){
+        String s = sort.largestNumber(new int[]{432,43243});
+        System.out.println(s);
+    }
+
+    @Test
+    public void relativeSort(){
+        int[] arr = sort.relativeSort(new int[]{2,3,1,3,2,4,6,7,9,2,19},new int[]{2,1,4,3,9,6});
+        for(int a:arr){
+            System.out.print(a);
+        }
     }
 }

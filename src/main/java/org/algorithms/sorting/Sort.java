@@ -1,5 +1,9 @@
 package org.algorithms.sorting;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
 public class Sort {
 
     public void mergeSort(int [] nums,int low,int high){
@@ -51,5 +55,87 @@ public class Sort {
                 k++;
             }
         }
+    }
+
+    class Points implements Comparable<Points>{
+        int x;
+        int y;
+
+        public Points(int x, int y){
+            this.x = x;
+            this.y =y;
+        }
+
+        public int compareTo(Points points){
+            int first = (x*x) + (y*y);
+            int second = (points.x*points.x) + (points.y*points.y);
+            return Integer.compare(first,second);
+        }
+    }
+
+    public int[][] kClosest(int[][] points, int k) {
+        ArrayList<Points> list = new ArrayList<Points>();
+        for(int i=0;i<points.length;i++){
+            list.add(new Points(points[i][0],points[i][1]));
+        }
+        Collections.sort(list);
+        int result [][] = new int[k][];
+        int index=0;
+        for(Points p: list){
+            if(index >=k){
+                break;
+            }
+            result[index] = new int[]{p.x,p.y};
+            index++;
+        }
+        return result;
+    }
+
+    /**
+     *
+     * @param order
+     * @param s
+     * @return
+     */
+    public String customSortString(String order, String s) {
+        ArrayList<Character> list = new ArrayList<>();
+        for(int i=0;i<s.length();i++){
+            list.add(s.charAt(i));
+        }
+        OrderComparator orderComparator = new OrderComparator(order);
+        Collections.sort(list,orderComparator);
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Character ch:list){
+            stringBuilder.append(ch);
+        }
+        return stringBuilder.toString();
+    }
+
+    public String largestNumber(int[] nums) {
+        ArrayList<Integer> list = new ArrayList<>();
+        // Convert int [] to List<Integer>
+        for(int i =0;i<nums.length;i++){
+            list.add(nums[i]);
+        }
+        StringBuilder builder = new StringBuilder();
+        for(Integer n :list){
+            builder.append(n);
+        }
+        return builder.toString();
+    }
+
+    public int[] relativeSort(int [] arr1, int [] arr2){
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int i=0;i<arr1.length;i++){
+            list.add(arr1[i]);
+        }
+        Collections.sort(list,new NumberComparator(arr2));
+        int [] result = new int[arr1.length];
+        int index =0;
+        for(Integer n :list){
+            result[index] = n;
+            index++;
+        }
+        return result;
     }
 }
